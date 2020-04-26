@@ -144,9 +144,8 @@ https://www.loom.com/share/6411470fddbd4e3d8fd71dbce9f04c50
 ```
 Logs & events  on cloud
 ```
-https://www.loom.com/share/7c703094a04144b6949ed65176497882
+https://www.loom.com/share/dd3f5ff5fddb4bdaa139994e53448f67
 ```
-
 
 
 <br/>
