@@ -21,7 +21,7 @@ def StartUpdater(request):
         update_package_info.delay(package)
 
         i += 1
-        if i ==1:
+        if i == 1:
             break
 
 
