@@ -68,30 +68,38 @@ Rabbit | Celery
 
 
 ## Installation Guide
+```
 $ python3 -m venv
 $ source .venv/bin/activate
-
+```
 If you wish to run your own build, you two options
  1. Use Docker.
-    
+    ```
     $ git clone https://github.com/karanftd/pelago_package_manager.git
     $ cd pelago_package_manager
     $ docker-compose build
     $ docker-compose up
-
+    ```
  2. Without docker.
+ ```
     $ git clone https://github.com/karanftd/pelago_package_manager.git
     $ cd pelago_package_manager
     $ docker run -d -p 5672:5672 rabbitmq
     $ pip install Celery
     $ celery -B -A cran worker -l info -E
-
+```
     Install dependancies
+```    
     $ pip install -r requirements.txt
+```
     Make migrations & migrate
+    ```
     $ python manage.py makemigrations && python manage.py migrate
+    ```
     Launching the app
+    ```
     $ python manage.py runserver
+    ```
 
 
 #### Endpoints
@@ -131,9 +139,13 @@ curl --location --request GET 'http://pelago.karanftd.com/package?search=releven
 ### Demo video
 
 Installation Docker-compose
+```
 https://www.loom.com/share/6411470fddbd4e3d8fd71dbce9f04c50
+```
 Logs & events  on cloud
+```
 https://www.loom.com/share/7c703094a04144b6949ed65176497882
+```
 
 
 
