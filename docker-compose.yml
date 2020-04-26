@@ -1,0 +1,68 @@
+version: '3'
+services:
+    #Postgres
+    db:
+        image: postgres
+        hostname: db
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=pelago
+
+
+    # RabbitMQ
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:3.6.9
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+
+    # Django
+    web:
+        environment: 
+            - AMQP_URI=amqp://guest:guest@rabbit//
+            - SQL_ENGINE=django.db.backends.postgresql
+            - SQL_USER=postgres
+            - SQL_PASSWORD=postgres
+            - SQL_HOST=db
+            - SQL_PORT=5432
+            - SQL_DATABASE=pelago
+            - DEBUG=0
+        build:
+            context: .
+            dockerfile: Dockerfile
+        hostname: web
+        command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        ports:
+            - "80:8000"
+        links:
+            - db
+            - rabbit
+        depends_on:
+            - rabbit
+            - db
+
+    # Celery worker
+    beat:
+        environment: 
+            - AMQP_URI=amqp://guest:guest@rabbit//
+            - SQL_ENGINE=django.db.backends.postgresql
+            - SQL_USER=postgres
+            - SQL_PASSWORD=postgres
+            - SQL_HOST=db
+            - SQL_PORT=5432
+            - SQL_DATABASE=pelago
+            - DEBUG=0
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: celery -B -A cran worker -l info -E
+        links:
+            - db
+            - rabbit
+        depends_on:
+            - rabbit
