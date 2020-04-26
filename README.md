@@ -58,7 +58,7 @@ Pyhton 3.7+, Docker, Docker-compose
 Django RESTful
 
 ##### Deployment
-Docker | GCP | CloudFlair(DNS)
+Docker | GCP | CloudFlare(DNS)
 
 ##### Database Development:
 Postgres | SQLite
