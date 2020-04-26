@@ -95,7 +95,35 @@ If you wish to run your own build, you two options
 Method | Endpoint | Functionality
 --- | --- | ---
 GET | `/package` | List cran packages
-GET | `/package?search=<package_name>` | Search package by name
+GET | `/package?search=<package_name>` | Search package by package name
+
+### example
+#### List cran packages
+```
+curl --location --request GET 'http://127.0.0.1:8000/package' \
+--header 'Content-Type: application/json'
+```
+
+#### Search package by name
+```
+curl --location --request GET 'http://127.0.0.1:8000/package?search=relevent' \
+--header 'Content-Type: application/json'
+```
+
+### Hosted solution
+I have hosted solution on Google Cloud VM
+
+List cran packages
+```
+curl --location --request GET 'http://pelago.karanftd.com/package' \
+--header 'Content-Type: application/json'
+```
+
+Search package by package name
+```
+curl --location --request GET 'http://pelago.karanftd.com/package?search=relevent' \
+--header 'Content-Type: application/json'
+```
 
 
 <br/>
